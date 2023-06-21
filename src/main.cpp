@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include <LiquidCrystal.h>
 // Crie um objeto LCD e associe os pinos da interface LCD (reset, enable, d4, d5, d6, d7) com os pinos do arduino.
-LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
+LiquidCrystal lcd(12, 11, 4, 5, 6, 7);
 // Esta variável irá indicar qual rede está operando. 0 para inversor e 1 para RGE.
 int invRGE = 0;
 
