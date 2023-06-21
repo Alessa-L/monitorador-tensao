@@ -1,12 +1,13 @@
 #include <Arduino.h>
 #include <LiquidCrystal.h>
+
 // Crie um objeto LCD e associe os pinos da interface LCD (reset, enable, d4, d5, d6, d7) com os pinos do arduino.
 LiquidCrystal lcd(12, 11, 4, 5, 6, 7);
 // Esta variável irá indicar qual rede está operando. 0 para inversor e 1 para RGE.
 int invRGE = 0;
 
 // put function declarations here:
-void tensaoBateria();
+void tensaoBateria(uint8_t pino);
 float leitura();
 
 void setup() {
@@ -78,7 +79,11 @@ void tensaoBateria(uint8_t pino) {
   lcd.print(tensaoMed);
   if (tensaoMed <= 12.0) {
     invRGE = 1;
+    digitalWrite(3, HIGH);
+    digitalWrite(9, HIGH);
   } else {
     invRGE = 0;
+    digitalWrite(3, LOW);
+    digitalWrite(9, LOW);
   }
 }
