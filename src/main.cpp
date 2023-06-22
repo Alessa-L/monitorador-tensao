@@ -8,7 +8,7 @@ int invRGE = 0;
 
 // put function declarations here:
 void tensaoBateria(uint8_t pino);
-float leitura();
+float leitura(uint8_t pino);
 void alerta();
 
 void setup() {
