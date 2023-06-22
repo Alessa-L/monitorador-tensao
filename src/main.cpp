@@ -9,6 +9,7 @@ int invRGE = 0;
 // put function declarations here:
 void tensaoBateria(uint8_t pino);
 float leitura();
+void alerta();
 
 void setup() {
   // put your setup code here, to run once:
@@ -60,15 +61,19 @@ float leitura(uint8_t pino) {
 
 void tensaoBateria(uint8_t pino) {
   float tensao_1 = leitura(pino);
+  delay(50);
   float tensao_2 = leitura(pino);
+  delay(50);
   float tensao_3 = leitura(pino);
 
   while (true) {
-    if (tensao_1 - tensao_2 >= 4.0 || tensao_1 - tensao_2 <= 4.0) {
+    if (tensao_1 - tensao_2 >= 4.0 || tensao_1 - tensao_2 <= -4.0) {
       tensao_1 = leitura(pino);
+      delay(50);
       tensao_2 = leitura(pino);
-    } else if (tensao_2 - tensao_3 >= 4.0 || tensao_2 - tensao_3 <= 4.0) {
+    } else if (tensao_2 - tensao_3 >= 4.0 || tensao_2 - tensao_3 <= -4.0) {
       tensao_2 = leitura(pino);
+      delay(50);
       tensao_3 = leitura(pino);
     } else {
       break;
@@ -79,6 +84,7 @@ void tensaoBateria(uint8_t pino) {
   lcd.print(tensaoMed);
   if (tensaoMed <= 12.0) {
     invRGE = 1;
+    alerta();
     digitalWrite(3, HIGH);
     digitalWrite(9, HIGH);
   } else {
@@ -86,4 +92,8 @@ void tensaoBateria(uint8_t pino) {
     digitalWrite(3, LOW);
     digitalWrite(9, LOW);
   }
+}
+
+void alerta() {
+  // TODO: Criar um beep alerta ao trocar para a RGE
 }
